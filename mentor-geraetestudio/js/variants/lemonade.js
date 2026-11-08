@@ -107,9 +107,9 @@ export default {
   defaults: { finish: 'chrome', color: '#f4f4f4', accent: 'black', palette: 'holo' },
   printing: {
     requirements: [
-      '<b>Gesamthöhe 290 mm</b> – zu hoch für einen Druck am Stück (Bauraum 256 mm). Kopf und Beine werden getrennt gedruckt.',
+      '<b>Gesamthöhe 290 mm</b> – zu hoch für einen Druck am Stück (X2D: max. 260 mm). Kopf und Beine werden getrennt gedruckt.',
       '<b>Beine</b> (ca. 213 mm hoch) liegen flach in einer Ebene → flach aufs Bett, ohne Stützen, maximal stabil.',
-      '<b>Kopf</b> (140 × Ø72 mm) in zwei Teilen: obere Kuppe mit Screen und untere Spitze, auf Höhe der Beinansätze getrennt; Spitze mit Stützen drucken.',
+      '<b>Kopf</b> (140 × Ø72 mm) in zwei Teilen: obere Kuppe mit Screen und untere Spitze, auf Höhe der Beinansätze getrennt; Spitze mit Stützen drucken – über die <b>zweite Düse</b> mit Trennschicht aus Stützmaterial, damit die polierte Spitze sauber bleibt.',
       '<b>Innenraum</b> sehr eng: rundes Display (Ø41 sichtbar → 1.8–2.1"-Klasse, meist ESP32-S3-basiert), Nano ESP32, Lautsprecher Ø20 und Mikrofon hinter dem Lochfeld.',
       '<b>Verbindung</b> Beine–Kopf mit Steckzapfen und Schrauben/Gewindeeinsätzen; Kabel durch einen Kanal (ca. 4 mm) in einem Bein.',
       '<b>Display:</b> Flaches Rund-Display liegt plan in der Lünette; die ebene Sitzfläche ist bereits im Kopf modelliert.',
@@ -118,6 +118,7 @@ export default {
       'Skulpturale Silhouette – wirkt wie ein Designobjekt, nicht wie Technik',
       'Beine flach gedruckt = einfach, stabil, ohne Stützen',
       'Rundes Display liest sich sofort als Gesicht',
+      '<b>X2D-Kammer (65 °C):</b> ASA/ABS druckbar – mit Aceton-Dampf geglättet, braucht die Oberfläche viel weniger Schleifen vor dem Chrom',
     ],
     challenges: [
       '<b>Zu hoch für einen Druck</b> – Fugen zwischen Kopfteilen und an den Beinansätzen müssen beim Verchromen verschwinden',

@@ -48,6 +48,8 @@ html, body {
   font-weight: 600;
   letter-spacing: 0.18em;
 }
+.nav-brand { display: inline-flex; align-items: center; gap: 10px; }
+.nav-icon { width: 26px; height: 26px; border-radius: 7px; }
 .nav-links { display: flex; gap: 28px; }
 .nav-links a {
   color: var(--muted);

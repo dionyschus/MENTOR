@@ -56,4 +56,4 @@ Versteckte Tastenkürzel für Präsentation und Tests:
 - I Panel «Umsetzung & 3D-Druck» (auch per Button unten rechts oder `?info=1` in der Adresse)
 
 Das Panel zeigt pro Variante Anforderungen, Pro und Herausforderungen für den 3D-Druck
-(Bambu Lab, Bauraum 256³) und den Einbau der Elektronik. Inhalt: Feld `printing` in der Variantendatei.
+(Bambu Lab X2D im FHGR UX Lab, Bauraum 256 × 256 × 260 mm, zwei Düsen) und den Einbau der Elektronik. Inhalt: Feld `printing` in der Variantendatei.

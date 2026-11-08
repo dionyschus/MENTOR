@@ -27,18 +27,20 @@ export default {
   defaults: { finish: 'black_chrome', color: '#727a86', accent: 'black', palette: 'holo' },
   printing: {
     requirements: [
-      `<b>Masse</b> ${G} × ${G} × ${LOW_H + BAND + TOP_H} mm – passt am Stück aufs Bambu-Druckbett.`,
+      `<b>Masse</b> ${G} × ${G} × ${LOW_H + BAND + TOP_H} mm – passt am Stück auf den X2D, auch im Zwei-Düsen-Modus (max. 256 mm Höhe).`,
       '<b>Teilung am Gürtel:</b> Unterteil mit der Standfläche nach unten, Pyramide mit dem Gürtel nach unten drucken – beide Schrägen (ca. 27–29°) ohne Stützen.',
       '<b>Screen</b> 52 × 86 mm (GIGA Display Shield, hochkant) in der Frontfacette, ca. 28° nach hinten geneigt, mit ≥ 12 mm Rand zu den Kanten – schaut leicht nach oben zum Nutzer.',
       `<b>Innenraum:</b> Display schräg hinter der Facette, Arduino GIGA R1 liegend im Unterteil (Standfläche ${BASE} mm, weiter oben breiter), Lautsprecher Ø28 hinter dem Gitter, Mikrofon daneben, USB-C hinten unten.`,
       '<b>Verbindung</b> Ober-/Unterteil über Steckrand und Gewindeeinsätze, so bleibt die Elektronik zugänglich.',
       '<b>Finish:</b> Spiegelchrom-Lack auf schwarzem Hochglanzgrund, darüber getönter Klarlack für den dunklen Look; Schriftzug Ton in Ton.',
+      '<b>Zwei Düsen:</b> Lautsprechergitter in Schwarz direkt mitdrucken, der Rest wird verchromt',
     ],
     pros: [
       'Nur ebene Facetten – ideal zum Schleifen und Polieren auf Spiegelglanz',
       'Klare, ikonische Silhouette; schwarzes Chrom wirkt edel und etwas bedrohlich',
       'Kein Stützmaterial nötig, zwei einfache Druckteile',
       'Geneigter Screen ist am Schreibtisch gut ablesbar',
+      '<b>X2D-Kammer (65 °C):</b> ASA/ABS druckbar – mit Aceton-Dampf geglättet, braucht die Oberfläche viel weniger Schleifen vor dem Chrom',
     ],
     challenges: [
       '<b>Scharfe Kanten</b> beim Schleifen nicht verrunden – Facettenkanten sind das Gestaltungsmerkmal',

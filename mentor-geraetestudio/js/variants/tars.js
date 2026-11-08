@@ -37,7 +37,7 @@ export default {
   defaults: { finish: 'dark_chrome', color: '#8d96a2', accent: 'black', palette: 'holo' },
   printing: {
     requirements: [
-      '<b>Mittelteil</b> 68 × 200 × 34 mm, <b>Seitenbalken</b> 24 × ca. 200 × 24 mm – alles passt einzeln aufs Bambu-Druckbett.',
+      '<b>Mittelteil</b> 68 × 200 × 34 mm, <b>Seitenbalken</b> 24 × ca. 200 × 24 mm – alles passt einzeln auf den X2D (auch stehend gedruckt, bis 260 mm Höhe).',
       '<b>Druckrichtung:</b> Teile liegend drucken (Front nach oben), so werden die grossen Sichtflächen am saubersten; Mittelteil als zwei Schalen (vorne/hinten), verschraubt.',
       '<b>Innenraum</b> Mittelteil ca. 64 × 30 mm: GIGA R1 (53 mm breit) passt hochkant hinter das Display; Lautsprecher Ø20 + Mikrofon hinter dem schmalen Gitter unten.',
       '<b>Display:</b> Das Screenfeld 52 × 120 mm braucht ein Streifen-Display (Bar-LCD). Mit Arduino-kompatiblem Treiber selten – Alternative: GIGA Display (52 × 86 mm) und Screen kürzer.',
@@ -48,6 +48,7 @@ export default {
       'Nur gerade Flächen – einfach zu drucken, zu schleifen und zu lackieren',
       'Kleine Einzelteile, Druck und Nacharbeit gut aufteilbar',
       'Gelenk ermöglicht echte Bewegung (Servo) als zusätzlicher Ausdruck',
+      '<b>Zwei Düsen:</b> Fugen und Gitter in Schwarz direkt mitdrucken – die dunklen Linien müssen nicht abgeklebt und lackiert werden',
     ],
     challenges: [
       '<b>Passendes langes Display</b> finden, das sich mit Arduino ansteuern lässt',

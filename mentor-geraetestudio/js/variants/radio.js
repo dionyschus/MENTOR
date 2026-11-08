@@ -24,7 +24,7 @@ export default {
   defaults: { finish: 'chrome', color: '#f4f4f4', accent: 'black', palette: 'holo' },
   printing: {
     requirements: [
-      `<b>Kopf</b> ${HW} × ${HH} × ${HD} mm als zwei Schalen (vorne/hinten), <b>Fuss</b> Ø130 mm, <b>Gabel</b> und Stiel separat – alles passt einzeln aufs Bambu-Druckbett, keine Stützen ausser an der Gabel.`,
+      `<b>Kopf</b> ${HW} × ${HH} × ${HD} mm als zwei Schalen (vorne/hinten), <b>Fuss</b> Ø130 mm, <b>Gabel</b> und Stiel separat – alles passt einzeln auf den X2D, keine Stützen ausser an der Gabel (dort mit Trennschicht der zweiten Düse).`,
       '<b>Elektronik als ein Modul im Kopf:</b> Arduino GIGA R1 mit aufgestecktem GIGA Display Shield (Screen 52 × 86 mm, hochkant) – offizielle Arduino-Hardware, kein Fremd-Display nötig.',
       '<b>Akustik:</b> Lautsprecher Ø40 hinter den Chromstäben, Mikrofon (MAX9814) seitlich im Gitter, mit Gummi vom Lautsprecher entkoppelt.',
       '<b>Bewegung:</b> Servo (SG90/MG90S) in der Gabelnabe neigt den Kopf um ±15°. Kabel durch eine hohle Achse (Messingrohr Ø6) und den Stiel in den Fuss.',
@@ -35,6 +35,8 @@ export default {
       '<b>Echte Gesten</b> per Servo verstärken die Modi (nicken, Kopf heben, Kopf senken)',
       '<b>Gut umsetzbar:</b> GIGA R1 + Display Shield als fertiges Modul, einfache Druckteile, viel Platz im Kopf',
       'Grosser Hochformat-Screen – die Gentleman-Büste ist auch aus Distanz lesbar',
+      '<b>Zwei Düsen:</b> schwarzer Gittergrund und Chromstäbe der Front in einem Druck – nur die Stäbe werden verchromt',
+      '<b>X2D-Kammer (65 °C):</b> ASA/ABS druckbar – mit Aceton-Dampf geglättet, braucht die Oberfläche viel weniger Schleifen vor dem Chrom',
     ],
     challenges: [
       '<b>Kabel durch das Gelenk:</b> genug Schlaufe lassen bzw. hohle Achse, sonst bricht es beim Nicken',
