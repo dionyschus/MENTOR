@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MENTOR Gerätestudio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#">MENTOR</a>
+      <nav id="variant-nav" class="nav-links"></nav>
+      <span class="nav-spacer"></span>
+    </div>
+  </header>
+
+  <main id="viewport"></main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

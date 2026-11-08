@@ -1,0 +1,2 @@
+Hier die Visualisierungsskizzen ablegen (jpg/png).
+In der zugehörigen Variante eintragen: sketch: 'skizzen/dateiname.jpg'
