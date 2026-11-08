@@ -13,7 +13,7 @@ export default {
   tagline: 'Glasprisma auf Chrom-Pyramide',
   status: 'Entwurf',
   description:
-    'MENTOR erscheint als grünes Röhren-Hologramm in einem Glaswürfel. Der Würfel sitzt auf einem flachen Pyramidenstumpf in Chrom-Optik (3D-gedruckt, verchromt). Vorne auf der Schräge: Gitter für Lautsprecher und Mikrofon, darunter der abstehende Schriftzug MENTOR.',
+    'MENTOR erscheint als grünes Röhren-Hologramm in einem Glaswürfel. Der Würfel sitzt auf einem flachen Pyramidenstumpf in Chrom-Optik (3D-gedruckt, verchromt). Vorne auf der Schräge: Gitter für Lautsprecher und Mikrofon, darunter dezent der Schriftzug MENTOR.',
   pros: [
     'Hologramm wirkt «körperlos» – passt zu «Ich existiere, weil es dich gibt»',
     'Starkes Retro-Futurismus-Bild: Chrom, Röhrengrün, Gentleman im Glas',
@@ -52,7 +52,8 @@ export default {
     front.add(geo.part(new THREE.PlaneGeometry(GW, GH), hatchMat, { position: [0, gy, 0.9] }));
     front.add(geo.part(geo.rectBezelGeometry(GW + 4, GH + 4, 2, GW, GH, 1, 0.8, 0.5), mats.accent, { position: [0, gy, 0] }));
 
-    addMentorLabel(front, mats.accent, { position: [0, -12, 0.2] });
+    // Ton in Ton (Chrom auf Chrom), klein und nur leicht erhaben – wie bei den anderen Varianten
+    addMentorLabel(front, mats.case, { position: [0, -12, 0.2], size: 6.5, depth: 0.8 });
 
     // ---------- Prisma mit Hologramm ----------
     const prism = buildHoloPrism({ geo, createFace, makeHW, size: C });
