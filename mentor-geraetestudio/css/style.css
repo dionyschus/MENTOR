@@ -81,6 +81,40 @@ html, body {
   transform: translateY(-14px);
 }
 
+/* ---------- Farbwähler links ---------- */
+.color-picker {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--nav-line);
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+.color-picker button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  background: var(--swatch);
+  border: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition: outline-color 0.15s;
+}
+.color-picker button:hover { outline-color: rgba(255, 255, 255, 0.35); }
+.color-picker button[aria-checked="true"] { outline-color: var(--text); }
+
 /* ---------- Panel «Umsetzung & 3D-Druck» ---------- */
 .info-toggle {
   position: fixed;
@@ -143,6 +177,7 @@ html, body {
 .info-section li b { color: var(--text); font-weight: 600; }
 
 @media (max-width: 600px) {
+  .color-picker { top: auto; bottom: 20px; left: 16px; transform: none; flex-direction: row; padding: 10px 14px; }
   .info-panel { top: auto; left: 16px; right: 16px; width: auto; max-height: 65vh; }
 
   .nav-spacer { display: none; }
