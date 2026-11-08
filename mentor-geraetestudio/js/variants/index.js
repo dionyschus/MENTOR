@@ -5,5 +5,6 @@ import parasite from './parasite.js';
 import tars from './tars.js';
 import lemonade from './lemonade.js';
 import diamond from './diamond.js';
+import radio from './radio.js';
 
-export const VARIANTS = [holoPyramide, parasite, tars, lemonade, diamond];
+export const VARIANTS = [holoPyramide, parasite, tars, lemonade, diamond, radio];

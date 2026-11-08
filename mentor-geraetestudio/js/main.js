@@ -13,6 +13,7 @@ import * as geo from './geometry.js';
 // R Drehen an/aus · X Röntgen · E Explosionsansicht · I Panel «Umsetzung & 3D-Druck»
 
 const VIEW_OFFSET = new THREE.Vector3(250, 90, 470);
+const BG = '#161618';   // gleich wie --bg in style.css: weiches Schwarz, Chrom hebt sich besser ab
 
 const $ = (id) => document.getElementById(id);
 
@@ -23,7 +24,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
-renderer.setClearColor('#000000', 1);
+renderer.setClearColor(BG, 1);
 viewport.appendChild(renderer.domElement);
 
 const labelRenderer = new CSS2DRenderer();
@@ -31,7 +32,7 @@ Object.assign(labelRenderer.domElement.style, { position: 'absolute', inset: '0'
 viewport.appendChild(labelRenderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color('#000000');
+scene.background = new THREE.Color(BG);
 
 // Studio-Umgebung für Chrom: Raum mit Grauverlauf (unten dunkel, oben hell) plus Softboxen
 // und Lichtstreifen. Chrom zeigt nur seine Umgebung – der Verlauf gibt den Flächen Helligkeit,
