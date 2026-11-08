@@ -74,6 +74,11 @@ export const FINISHES = {
     desc: 'Schwarzer Hochglanzgrund, Chromlack, dann leicht in eine Richtung angeschliffen und mit getöntem Klarlack versiegelt. Aufwand: sehr hoch.',
     props: { roughness: 0.22, metalness: 1, clearcoat: 0.4, clearcoatRoughness: 0.15, sheen: 0, normalMap: BRUSHED, normalScale: 0.25, anisotropy: 0.7, anisotropyRotation: Math.PI / 2 },
   },
+  black_chrome: {
+    label: 'Dunkles Chrom, hochglanzpoliert',
+    desc: 'Schwarzer Hochglanzgrund, Spiegelchrom-Lack, darüber getönter (rauchschwarzer) 2K-Klarlack, poliert. Dunkler Spiegel-Look. Aufwand: sehr hoch.',
+    props: { roughness: 0.04, metalness: 1, clearcoat: 1, clearcoatRoughness: 0.02, sheen: 0 },
+  },
   chrome: {
     label: 'Chrom-Spiegel (Galvanik / Spiegellack)',
     desc: 'Spiegelchrom-Spray auf schwarzem Hochglanz-Grund oder galvanisch beschichtet. Sehr empfindlich, eher für Akzente. Aufwand: sehr hoch.',

@@ -4,5 +4,6 @@ import holoPyramide from './holo-pyramide.js';
 import parasite from './parasite.js';
 import tars from './tars.js';
 import lemonade from './lemonade.js';
+import diamond from './diamond.js';
 
-export const VARIANTS = [holoPyramide, parasite, tars, lemonade];
+export const VARIANTS = [holoPyramide, parasite, tars, lemonade, diamond];
