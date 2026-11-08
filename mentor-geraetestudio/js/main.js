@@ -7,6 +7,7 @@ import { FaceController, FaceScreen, MODES } from './face.js';
 import { createMaterials, applyFinish, applyAccent } from './materials.js';
 import { makeHW } from './hardware.js';
 import * as geo from './geometry.js';
+import { createPaintPanel, FINISH_OPTIONS, hsvToHex, hexToHsv } from './paint.js';
 
 // Tastenkürzel (keine sichtbare Steuerung):
 // 1–5 Modus · G Glitch · B Seitenblick · L Lächeln halten · S Sprechen an/aus
@@ -101,7 +102,7 @@ const state = {
   xray: false,
   explode: 0,
   explodeTarget: 0,
-  color: 'chrome',
+  paint: { finish: 'original', h: 0, s: 0, v: 0.2, open: true },
   center: new THREE.Vector3(0, 90, 0),
   radius: 150,
 };
@@ -147,45 +148,27 @@ function measure(root) {
 
 // Eine Variante kann ihr Standard-Aussehen mitbringen (Finish, Farbe, Akzente, Display-Farbe).
 function applyDefaults(d = {}) {
-  applyColor(state.color);
+  applyColor();
   applyAccent(mats, d.accent ?? 'black');
   face.palette = d.palette ?? 'holo';
 }
 
-// ---------- Farbwähler (links) ----------
-// «Chrome» = Standard-Look der jeweiligen Variante; alle anderen Farben sind matt lackiert.
-const COLOR_OPTIONS = {
-  chrome: { label: 'Chrome', swatch: 'linear-gradient(135deg, #f5f5f7 0%, #8e8e93 55%, #d1d1d6 100%)' },
-  black: { label: 'Black', swatch: '#1d1d1f', finish: 'primed_matte', color: '#26272b' },
-  blue: { label: 'Dunkelblau', swatch: '#1c2e52', finish: 'primed_matte', color: '#1f3358' },
-  purple: { label: 'Dunkellila', swatch: '#3a2160', finish: 'primed_matte', color: '#3b2260' },
-  orange: { label: 'Dunkelorange', swatch: '#8a4216', finish: 'primed_matte', color: '#8c4316' },
-  green: { label: 'Flaschengrün', swatch: '#1e3a2c', finish: 'primed_matte', color: '#21402f' },
-  bordeaux: { label: 'Bordeaux', swatch: '#4a1622', finish: 'primed_matte', color: '#521827' },
-  cream: { label: 'Creme (50er-Haushaltsgerät)', swatch: '#d9cdb4', finish: 'primed_matte', color: '#d4c7ab' },
-};
-
-function applyColor(key) {
-  const opt = COLOR_OPTIONS[key] ?? COLOR_OPTIONS.chrome;
+// ---------- Farb-Panel (links) ----------
+// «Original» = Standard-Look der Variante; sonst eigene Farbe als Chrome, Normal (glänzend) oder Matt.
+function applyColor() {
+  const p = state.paint;
   const d = state.variant?.defaults ?? {};
-  applyFinish(mats.case, opt.finish ?? d.finish ?? 'chrome');
-  mats.case.color.set(opt.color ?? d.color ?? '#ffffff');
+  if (p.finish === 'original') {
+    applyFinish(mats.case, d.finish ?? 'chrome');
+    mats.case.color.set(d.color ?? '#ffffff');
+  } else {
+    applyFinish(mats.case, FINISH_OPTIONS[p.finish].finish);
+    mats.case.color.set(hsvToHex(p.h, p.s, p.v));
+  }
 }
 
-function setColor(key) {
-  state.color = COLOR_OPTIONS[key] ? key : 'chrome';
-  applyColor(state.color);
-  document.querySelectorAll('#color-picker button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.color === state.color)));
-  try { localStorage.setItem('mentor-color', state.color); } catch {}
-}
-
-function renderColorPicker() {
-  $('color-picker').innerHTML = Object.entries(COLOR_OPTIONS).map(([k, o]) =>
-    `<button role="radio" data-color="${k}" aria-label="${o.label}" title="${o.label}" style="--swatch:${o.swatch}"></button>`).join('');
-  $('color-picker').addEventListener('click', (e) => {
-    const b = e.target.closest('button[data-color]');
-    if (b) setColor(b.dataset.color);
-  });
+function savePaint() {
+  try { localStorage.setItem('mentor-paint', JSON.stringify(state.paint)); } catch {}
 }
 
 function loadVariant(id) {
@@ -361,10 +344,14 @@ function loop() {
 }
 
 renderNav();
-renderColorPicker();
-try { state.color = localStorage.getItem('mentor-color') ?? 'chrome'; } catch {}
-if (params.get('color')) state.color = params.get('color');   // z. B. ?color=blue
+try { Object.assign(state.paint, JSON.parse(localStorage.getItem('mentor-paint')) ?? {}); } catch {}
+// z. B. ?finish=matte&color=3b2260 (Hex ohne #)
+if (FINISH_OPTIONS[params.get('finish')]) state.paint.finish = params.get('finish');
+if (params.get('color') && hexToHsv('#' + params.get('color'))) {
+  Object.assign(state.paint, hexToHsv('#' + params.get('color')));
+  if (state.paint.finish === 'original') state.paint.finish = 'matte';
+}
+createPaintPanel($('paint'), { state: state.paint, onChange: () => { applyColor(); savePaint(); } });
 resize();
 loadVariant(location.hash.slice(1));
-setColor(state.color);
 loop();

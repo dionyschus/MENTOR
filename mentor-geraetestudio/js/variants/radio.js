@@ -2,7 +2,7 @@
 // Idee aus dem Systemprompt: Der Belohnungsmodus ist ein 50er-Werbesprecher, und MENTOR hört bei
 // Calls mit. Ein Studiomikrofon erzählt beides – es ist die Stimme, und es hört zu.
 //  – Pillenförmiger Kopf mit Hochformat-Screen (Gentleman-Büste) und verchromten Gitterstäben
-//  – Kopf in einer Gabel, per Servo geneigt: Nicken, Kopf heben, Kopf senken
+//  – Kopf in einer Gabel, von Hand neigbar (Reibungsgelenk, keine Elektromechanik)
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { addMentorLabel } from './shared/label.js';
@@ -14,10 +14,10 @@ const BASE_H = 20, STEM_H = 40;
 export default {
   id: 'radio',
   name: 'RADIO',
-  tagline: '50er-Sprechermikrofon mit nickendem Kopf',
+  tagline: '50er-Sprechermikrofon auf Gabelstativ',
   status: 'Entwurf',
   description:
-    'MENTOR als Sprechermikrofon aus einem 50er-Radiostudio: ein pillenförmiger Chromkopf mit Screen und verchromten Gitterstäben, gelagert in einer Gabel. Ein Servo neigt den Kopf – MENTOR nickt, hebt stolz den Kopf oder senkt ihn enttäuscht.',
+    'MENTOR als Sprechermikrofon aus einem 50er-Radiostudio: ein pillenförmiger Chromkopf mit Screen und verchromten Gitterstäben, gelagert in einer Gabel. Der Kopf lässt sich von Hand neigen, wie bei einem echten Studiomikrofon.',
   pros: [],
   cons: [],
   sketch: null,
@@ -27,20 +27,21 @@ export default {
       `<b>Kopf</b> ${HW} × ${HH} × ${HD} mm als zwei Schalen (vorne/hinten), <b>Fuss</b> Ø130 mm, <b>Gabel</b> und Stiel separat – alles passt einzeln auf den X2D, keine Stützen ausser an der Gabel (dort mit Trennschicht der zweiten Düse).`,
       '<b>Elektronik als ein Modul im Kopf:</b> Arduino GIGA R1 mit aufgestecktem GIGA Display Shield (Screen 52 × 86 mm, hochkant) – offizielle Arduino-Hardware, kein Fremd-Display nötig.',
       '<b>Akustik:</b> Lautsprecher Ø40 hinter den Chromstäben, Mikrofon (MAX9814) seitlich im Gitter, mit Gummi vom Lautsprecher entkoppelt.',
-      '<b>Bewegung:</b> Servo (SG90/MG90S) in der Gabelnabe neigt den Kopf um ±15°. Kabel durch eine hohle Achse (Messingrohr Ø6) und den Stiel in den Fuss.',
+      '<b>Gelenk:</b> Kopf von Hand neigbar über ein Reibungsgelenk (Achse mit Federscheibe oder Rändelschraube) – keine Elektromechanik. Kabel durch eine hohle Achse (Messingrohr Ø6) und den Stiel in den Fuss.',
       '<b>Stand:</b> Stahl-Ballast (Unterlegscheiben) im Fuss, USB-C hinten am Fuss.',
     ],
     pros: [
       '<b>Story auf einen Blick:</b> Studiomikrofon = 50er-Werbesprecher + Lauscher, der bei jedem Call mithört',
-      '<b>Echte Gesten</b> per Servo verstärken die Modi (nicken, Kopf heben, Kopf senken)',
+      '<b>Einfache Mechanik:</b> kein Servo, keine Motorsteuerung – weniger Fehlerquellen und kein Geräusch in Calls',
+      'Kopf lässt sich von Hand auf die Sitzhöhe des Nutzers ausrichten',
       '<b>Gut umsetzbar:</b> GIGA R1 + Display Shield als fertiges Modul, einfache Druckteile, viel Platz im Kopf',
       'Grosser Hochformat-Screen – die Gentleman-Büste ist auch aus Distanz lesbar',
       '<b>Zwei Düsen:</b> schwarzer Gittergrund und Chromstäbe der Front in einem Druck – nur die Stäbe werden verchromt',
       '<b>X2D-Kammer (65 °C):</b> ASA/ABS druckbar – mit Aceton-Dampf geglättet, braucht die Oberfläche viel weniger Schleifen vor dem Chrom',
     ],
     challenges: [
-      '<b>Kabel durch das Gelenk:</b> genug Schlaufe lassen bzw. hohle Achse, sonst bricht es beim Nicken',
-      '<b>Servogeräusch</b> kann in Calls stören: langsame Bewegungen, leiser (digitaler) Servo',
+      '<b>Kabel durch das Gelenk:</b> genug Schlaufe lassen bzw. hohle Achse, damit es beim Neigen nicht knickt',
+      '<b>Reibungsgelenk</b> muss den schweren Kopf in jeder Lage halten – Federscheibe/Rändelschraube testen',
       '<b>Schwerer Kopf auf dünnem Stiel:</b> Ballast im Fuss und steife Gabel nötig',
       'Die Chromstäbe einzeln schleifen und polieren ist Fleissarbeit – als Teil der Frontschale drucken',
     ],
@@ -102,15 +103,9 @@ export default {
     head.add(makeHW('mic', { position: [0, grY - 22, front - 8], rotation: [Math.PI / 2, 0, 0] }));
     root.add(head);
 
-    root.add(makeHW('servo', { position: [armX - 2, pivotY, 0], rotation: [0, 0, Math.PI / 2] }));
     root.add(makeHW('usbc', { position: [0, 10, -58] }));
 
-    return {
-      root,
-      update({ face }) {
-        // Servo: Kopf nickt / hebt sich / senkt sich je nach Modus (±15° Anschlag)
-        head.rotation.x = THREE.MathUtils.clamp(face.pose.pitch * 1.2, -0.26, 0.26);
-      },
-    };
+    // Kopf ist statisch; der Ausdruck liegt ganz im Screen.
+    return { root };
   },
 };

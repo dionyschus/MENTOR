@@ -53,6 +53,8 @@ Versteckte Tastenkürzel für Präsentation und Tests:
 - 1–5 Modus (Therapeut, Belohnung, Enttäuschung, Riss, Neutral)
 - G Glitch · B Seitenblick · L Lächeln halten · S Sprechen an/aus
 - R Drehen an/aus · X Röntgen (Hardware) · E Explosionsansicht
+- Farb-Panel links: Oberfläche (Original / Chrome / Normal / Matt), Farbrad, Helligkeit, Hex, Vorlagen
+  (Link mit Farbe: `?finish=matte&color=3b2260`)
 - I Panel «Umsetzung & 3D-Druck» (auch per Button unten rechts oder `?info=1` in der Adresse)
 
 Das Panel zeigt pro Variante Anforderungen, Pro und Herausforderungen für den 3D-Druck
