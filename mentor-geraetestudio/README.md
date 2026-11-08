@@ -9,8 +9,11 @@ ES-Module brauchen einen lokalen Server (Doppelklick auf `index.html` reicht nic
 
 ```bash
 cd mentor-geraetestudio
-python3 -m http.server 8000
+python3 serve.py
 ```
+
+`serve.py` schaltet den Browser-Cache ab, damit Änderungen nach einem Reload sofort sichtbar sind
+(`python3 -m http.server 8000` geht auch, zeigt aber manchmal alte Dateien).
 
 Dann <http://localhost:8000> öffnen. Alternativ: VS Code → «Live Server».
 Direktlink auf eine Variante: `http://localhost:8000/#<variant-id>`

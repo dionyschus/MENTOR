@@ -8,6 +8,7 @@
 //  – Beine treten bei ca. 63 % Höhe aus, steigen zur spitzen Knie-Ecke (≈ 74 %) und fallen konvex zum Tisch
 import * as THREE from 'three';
 import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+import { addMentorLabel } from './shared/label.js';
 
 const TOTAL_H = 290;
 const HEAD_L = 140;               // Länge Kopf (Spitze → Scheitel)
@@ -103,7 +104,7 @@ export default {
   ],
   cons: [
     'Tiefe Rippen + Spiegelchrom: aufwendigste Nachbearbeitung aller Varianten',
-    'Wenig Platz im Kopf: nur kleines Rund-Display (1.28") und kompakte Elektronik',
+    'Wenig Platz im Kopf: rundes Display (~2") und kompakte Elektronik müssen eng verbaut werden',
     'Kopf sitzt hoch, Beine müssen steif und sauber verbunden sein',
   ],
   sketch: 'skizzen/screen-varianten.jpg',
@@ -122,7 +123,7 @@ export default {
     const headGeo = new THREE.LatheGeometry(profile, RIBS * 18);
 
     // Screen-Position: knapp unter der breitesten Stelle, vorne (+Z) – dort ist der Kopf gleichmässig gewölbt
-    const SCR_R = 17;                       // aktive Fläche GC9A01 ≈ Ø32
+    const SCR_R = 20.5;                     // Ø41 → braucht ein rundes Display der 1.8–2.1"-Klasse
     const RING_R = SCR_R + 1.4;             // feiner Chromrand
     const scrLocalY = T_W * HEAD_L - 8;
     const smooth = THREE.MathUtils.smoothstep;
@@ -134,7 +135,9 @@ export default {
       let x = pos.getX(i), z = pos.getZ(i);
       // Rippen laufen rund um den Screen sanft aus → glatte, gewölbte Fläche für das «Glas»
       const dist = z > 0 ? Math.hypot(x, pos.getY(i) - scrLocalY) : Infinity;
-      const ribs = smooth(dist, RING_R + 1, RING_R + 9);
+      // …und hinten um den Schriftzug
+      const distBack = z < 0 ? Math.hypot(x, pos.getY(i) - scrLocalY) : Infinity;
+      const ribs = smooth(dist, RING_R + 1, RING_R + 9) * smooth(distBack, 15, 22);
       const k = 1 - RIB_DEPTH * ribs * Math.abs(Math.sin((RIBS * Math.atan2(x, z)) / 2));
       pos.setXYZ(i, x * k, pos.getY(i), z * k);
     }
@@ -165,6 +168,12 @@ export default {
     }
     screen.add(geo.part(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(rim, true), 192, 1.1, 12, true), mats.case));
     root.add(screen);
+
+    // ---------- Schriftzug hinten: klein, Ton in Ton, folgt der Wölbung ----------
+    addMentorLabel(root, mats.case, {
+      position: [0, scrY, 0], rotation: [0, Math.PI, 0], size: 4.5, depth: 0.5,
+      conform: (x, y) => surfaceZ(x, scrLocalY + y) - 0.15,
+    });
 
     // ---------- Löcher in den vorderen Rillen (Lautsprecher + Mikrofon) ----------
     const holeSpots = [];
@@ -198,7 +207,7 @@ export default {
     }
 
     // ---------- Hardware ----------
-    root.add(makeHW('round128', { position: [0, scrY, surfaceZ(0, scrLocalY) - 8], rotation: [Math.PI / 2, 0, 0] }));
+    root.add(makeHW('round21', { position: [0, scrY, surfaceZ(0, scrLocalY) - 12], rotation: [Math.PI / 2, 0, 0] }));
     root.add(makeHW('nanoEsp32', { position: [0, scrY - 2, -8], rotation: [0, 0, Math.PI / 2] }));
     root.add(makeHW('speaker20', { position: [0, scrY - RING_R - 18, 14], rotation: [Math.PI / 2, 0, 0] }));
     root.add(makeHW('mic', { position: [0, scrY + 20, 0], rotation: [Math.PI / 2, 0, 0] }));
