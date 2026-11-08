@@ -25,6 +25,21 @@
 
   <main id="viewport"></main>
 
+  <button id="info-toggle" class="info-toggle" aria-expanded="false" aria-controls="info-panel">
+    Umsetzung &amp; 3D-Druck
+  </button>
+  <aside id="info-panel" class="info-panel" hidden>
+    <header class="info-head">
+      <div>
+        <p class="info-kicker">Umsetzung &amp; 3D-Druck</p>
+        <h2 id="info-title"></h2>
+      </div>
+      <button id="info-close" class="info-close" aria-label="Schliessen">×</button>
+    </header>
+    <p class="info-printer">Annahme: Bambu Lab X1 / P1 / A1 · Bauraum 256 × 256 × 256 mm</p>
+    <div id="info-body"></div>
+  </aside>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

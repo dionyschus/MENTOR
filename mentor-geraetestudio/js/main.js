@@ -10,7 +10,7 @@ import * as geo from './geometry.js';
 
 // Tastenkürzel (keine sichtbare Steuerung):
 // 1–5 Modus · G Glitch · B Seitenblick · L Lächeln halten · S Sprechen an/aus
-// R Drehen an/aus · X Röntgen · E Explosionsansicht
+// R Drehen an/aus · X Röntgen · E Explosionsansicht · I Panel «Umsetzung & 3D-Druck»
 
 const VIEW_OFFSET = new THREE.Vector3(250, 90, 470);
 
@@ -188,6 +188,7 @@ function loadVariant(id) {
   applyXray();
   applyExplode();
   document.querySelectorAll('#variant-nav a').forEach((a) => a.classList.toggle('active', a.dataset.id === v.id));
+  renderInfo();
   if (location.hash.slice(1) !== v.id) history.replaceState(null, '', `#${v.id}`);
 }
 
@@ -236,6 +237,37 @@ function applyExplode() {
   });
 }
 
+// ---------- Panel «Umsetzung & 3D-Druck» ----------
+// Inhalt kommt aus dem Feld `printing` der Variante: { requirements, pros, challenges } (Arrays mit HTML-Text).
+const INFO_SECTIONS = [
+  ['requirements', 'Anforderungen', ''],
+  ['pros', 'Pro', 'pro'],
+  ['challenges', 'Herausforderungen', 'con'],
+];
+
+function renderInfo() {
+  const v = state.variant;
+  const info = v.printing ?? {};
+  $('info-title').textContent = v.name;
+  $('info-body').innerHTML = INFO_SECTIONS.map(([key, title, cls]) => `
+    <details class="info-section ${cls}" open>
+      <summary>${title}</summary>
+      <ul>${(info[key] ?? ['Noch offen.']).map((t) => `<li>${t}</li>`).join('')}</ul>
+    </details>`).join('');
+}
+
+function setInfoOpen(open) {
+  $('info-panel').hidden = !open;
+  $('info-toggle').setAttribute('aria-expanded', String(open));
+  try { localStorage.setItem('mentor-info-open', open ? '1' : '0'); } catch {}
+}
+$('info-toggle').addEventListener('click', () => setInfoOpen(true));
+$('info-close').addEventListener('click', () => setInfoOpen(false));
+// ?info=1 in der Adresse öffnet das Panel direkt (z. B. für geteilte Links)
+let infoOpen = params.get('info') === '1';
+try { infoOpen ||= localStorage.getItem('mentor-info-open') === '1'; } catch {}
+setInfoOpen(infoOpen);
+
 // ---------- Navigation ----------
 function renderNav() {
   $('variant-nav').innerHTML = VARIANTS.map((v, i) =>
@@ -257,6 +289,7 @@ window.addEventListener('keydown', (e) => {
     case 'r': controls.autoRotate = !controls.autoRotate; break;
     case 'x': state.xray = !state.xray; applyXray(); break;
     case 'e': state.explodeTarget = state.explodeTarget > 0 ? 0 : 1; break;
+    case 'i': setInfoOpen($('info-panel').hidden); break;
   }
 });
 

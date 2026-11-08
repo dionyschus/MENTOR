@@ -84,6 +84,28 @@ export default {
   ],
   sketch: 'skizzen/holo-varianten.jpg',
   defaults: { finish: 'chrome', color: '#f4f4f4', accent: 'black', palette: 'holo' },
+  printing: {
+    requirements: [
+      '<b>Masse</b> ca. 216 × 196 × 104 mm (ohne Prisma) – passt am Stück aufs Bambu-Druckbett.',
+      '<b>Druckrichtung:</b> kopfüber (Oberseite aufs Bett), Beine zeigen nach oben – mit Tree-Supports von Bambu Studio für die Beinbögen.',
+      '<b>Alternative:</b> Sockel und Beine getrennt drucken und mit Metallstiften verbinden; dann sieht man aber eine Fuge in der Hohlkehle.',
+      '<b>Innenraum</b> nur ca. 28 mm hoch: Arduino GIGA R1 liegt flach, GIGA Display liegt unter dem Prisma, Lautsprecher Ø28 + Mikrofon hinter dem Frontgitter.',
+      '<b>Prisma:</b> Acrylwürfel 110 mm mit 45°-Scheibe (wie bei PYRAMIDE), nicht gedruckt.',
+      '<b>Service:</b> abnehmbare Bodenplatte zwischen den Beinen; USB-C hinten.',
+    ],
+    pros: [
+      'Organische Form mit Hohlkehlen – wirkt wie gegossen, sehr starkes Bild',
+      'Kompakt: Sockel nicht grösser als nötig',
+      'Steht frei auf vier Punkten, kippsicher',
+    ],
+    challenges: [
+      '<b>Stützstrukturen</b> an den Beinbögen hinterlassen Spuren, die vor dem Verchromen geschliffen werden müssen',
+      '<b>Hohlkehlen</b> schwer zu schleifen (enge Rundungen) – Chrom zeigt jede Unebenheit',
+      'Beinspitzen sind Schwachstellen: mindestens 4 Wände bzw. 100 % Infill in den Beinen',
+      'Wenig Bauhöhe im Sockel – Kabel und Stecker sauber planen',
+      'Prisma (ca. 250 g) sitzt oben: Schwerpunkt prüfen, ggf. Gewicht im Sockel',
+    ],
+  },
 
   build({ mats, createFace, makeHW, geo }) {
     const root = new THREE.Group();

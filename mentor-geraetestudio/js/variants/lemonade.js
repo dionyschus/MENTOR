@@ -105,6 +105,28 @@ export default {
   ],
   sketch: 'skizzen/screen-varianten.jpg',
   defaults: { finish: 'chrome', color: '#f4f4f4', accent: 'black', palette: 'holo' },
+  printing: {
+    requirements: [
+      '<b>Gesamthöhe 290 mm</b> – zu hoch für einen Druck am Stück (Bauraum 256 mm). Kopf und Beine werden getrennt gedruckt.',
+      '<b>Beine</b> (ca. 213 mm hoch) liegen flach in einer Ebene → flach aufs Bett, ohne Stützen, maximal stabil.',
+      '<b>Kopf</b> (140 × Ø72 mm) in zwei Teilen: obere Kuppe mit Screen und untere Spitze, auf Höhe der Beinansätze getrennt; Spitze mit Stützen drucken.',
+      '<b>Innenraum</b> sehr eng: rundes Display (Ø41 sichtbar → 1.8–2.1"-Klasse, meist ESP32-S3-basiert), Nano ESP32, Lautsprecher Ø20 und Mikrofon hinter dem Lochfeld.',
+      '<b>Verbindung</b> Beine–Kopf mit Steckzapfen und Schrauben/Gewindeeinsätzen; Kabel durch einen Kanal (ca. 4 mm) in einem Bein.',
+      '<b>Display:</b> Flaches Rund-Display liegt plan in der Lünette; die ebene Sitzfläche ist bereits im Kopf modelliert.',
+    ],
+    pros: [
+      'Skulpturale Silhouette – wirkt wie ein Designobjekt, nicht wie Technik',
+      'Beine flach gedruckt = einfach, stabil, ohne Stützen',
+      'Rundes Display liest sich sofort als Gesicht',
+    ],
+    challenges: [
+      '<b>Zu hoch für einen Druck</b> – Fugen zwischen Kopfteilen und an den Beinansätzen müssen beim Verchromen verschwinden',
+      '<b>Grosse gewölbte Spiegelfläche:</b> Druckschichten auf der Rundung sehr sichtbar, aufwendigstes Schleifen aller Varianten',
+      'Sehr wenig Platz im Kopf für Display, Board, Lautsprecher und Kabel',
+      'Kopf sitzt hoch auf dünnen Beinen – Steifigkeit und Kippsicherheit testen',
+      'Arduino-taugliches rundes 2"-Display mit genug Leistung für Animationen wählen',
+    ],
+  },
 
   build({ mats, createFace, makeHW, geo }) {
     const root = new THREE.Group();

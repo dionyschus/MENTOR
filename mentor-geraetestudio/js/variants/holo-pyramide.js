@@ -26,6 +26,28 @@ export default {
   ],
   sketch: 'skizzen/holo-varianten.jpg',
   defaults: { finish: 'chrome', color: '#f4f4f4', accent: 'black', palette: 'holo' },
+  printing: {
+    requirements: [
+      '<b>Sockel</b> 200 × 200 × 42 mm – passt am Stück aufs Bambu-Druckbett.',
+      '<b>Druckrichtung:</b> Sockel als Schale mit der grossen Fläche nach unten; die Schrägen (ca. 40°) drucken ohne Stützen. Deckfläche als separate Platte mit Fenster fürs Display.',
+      '<b>Innenraum:</b> Arduino GIGA R1 + GIGA Display Shield (liegend, ca. 25 mm hoch gestapelt), Lautsprecher Ø40 und Mikrofon hinter dem Frontgitter, USB-C hinten.',
+      '<b>Prisma ist kein Druckteil:</b> Acrylwürfel 110 mm (zugekauft oder aus 3-mm-Platten verklebt) plus 45°-Scheibe aus Teleprompter-/Spiegelacryl für den Hologramm-Effekt.',
+      '<b>Service:</b> Bodenplatte verschraubt (M3 mit Gewindeeinsätzen), damit die Elektronik zugänglich bleibt.',
+      '<b>Akustik:</b> Gitter offen genug (≥ 40 % Lochanteil), Mikrofon mit Gummi entkoppelt und vom Lautsprecher getrennt.',
+    ],
+    pros: [
+      'Einfache, kantige Geometrie – schnell gedruckt, kaum Stützmaterial',
+      'Grosse ebene Flächen lassen sich gut schleifen und lackieren',
+      'Viel Platz im Sockel: Elektronik, Kabel und Lautsprecher passen bequem',
+      'Prisma ist austauschbar und unabhängig vom Druck',
+    ],
+    challenges: [
+      '<b>Chrom auf grossen Flächen</b> zeigt jede Druckschicht – viel Schleifen (bis 800er) und Hochglanz-Grundierung nötig',
+      '<b>Pepper\'s Ghost</b> braucht ein helles Display und gedämpftes Licht, sonst ist das Hologramm schwach',
+      'Wärme des Displays unter dem Glas: kleine Lüftungsschlitze im Boden vorsehen',
+      'Hologramm nur von vorne gut sichtbar',
+    ],
+  },
 
   build({ mats, createFace, makeHW, geo }) {
     const root = new THREE.Group();

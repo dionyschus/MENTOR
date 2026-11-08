@@ -35,6 +35,27 @@ export default {
   ],
   sketch: 'skizzen/screen-varianten.jpg',
   defaults: { finish: 'dark_chrome', color: '#8d96a2', accent: 'black', palette: 'holo' },
+  printing: {
+    requirements: [
+      '<b>Mittelteil</b> 68 × 200 × 34 mm, <b>Seitenbalken</b> 24 × ca. 200 × 24 mm – alles passt einzeln aufs Bambu-Druckbett.',
+      '<b>Druckrichtung:</b> Teile liegend drucken (Front nach oben), so werden die grossen Sichtflächen am saubersten; Mittelteil als zwei Schalen (vorne/hinten), verschraubt.',
+      '<b>Innenraum</b> Mittelteil ca. 64 × 30 mm: GIGA R1 (53 mm breit) passt hochkant hinter das Display; Lautsprecher Ø20 + Mikrofon hinter dem schmalen Gitter unten.',
+      '<b>Display:</b> Das Screenfeld 52 × 120 mm braucht ein Streifen-Display (Bar-LCD). Mit Arduino-kompatiblem Treiber selten – Alternative: GIGA Display (52 × 86 mm) und Screen kürzer.',
+      '<b>Gelenk:</b> Achse durch alle drei Blöcke (M4-Gewindestange oder Messingrohr); optional Servo für Balken-Gesten.',
+      '<b>Balance:</b> Gewicht (z. B. Stahlplatte) unten im Mittelteil, damit das Dreibein sicher steht.',
+    ],
+    pros: [
+      'Nur gerade Flächen – einfach zu drucken, zu schleifen und zu lackieren',
+      'Kleine Einzelteile, Druck und Nacharbeit gut aufteilbar',
+      'Gelenk ermöglicht echte Bewegung (Servo) als zusätzlicher Ausdruck',
+    ],
+    challenges: [
+      '<b>Passendes langes Display</b> finden, das sich mit Arduino ansteuern lässt',
+      '<b>Dunkles, gebürstetes Chrom</b> ist ein aufwendiges Finish (Chromlack, anschleifen, getönter Klarlack); zeigt Fingerabdrücke',
+      'Schmales Gehäuse: wenig Luft für Kabel, Stecker und Wärme',
+      'Hohe, schmale Form kippt leichter – Gewicht und Kippwinkel testen',
+    ],
+  },
 
   build({ mats, createFace, makeHW, geo }) {
     const root = new THREE.Group();
