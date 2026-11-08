@@ -179,6 +179,7 @@ html, body {
 
 .info-panel {
   position: fixed;
+  overflow-wrap: anywhere;
   top: calc(var(--nav-h) + 16px);
   right: 16px;
   bottom: 16px;
@@ -219,10 +220,38 @@ html, body {
 .info-section.con li::before { content: "!"; color: #ff9f0a; font-weight: 600; }
 .info-section li b { color: var(--text); font-weight: 600; }
 
-@media (max-width: 600px) {
-  .paint { top: auto; bottom: 20px; transform: none; }
-  .info-panel { top: auto; left: 16px; right: 16px; width: auto; max-height: 65vh; }
-
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  :root { --nav-h: 84px; }
+  .nav-inner { flex-wrap: wrap; align-content: center; row-gap: 8px; padding: 0 16px; }
+  .nav-brand { flex: 1 0 100%; font-size: 14px; }
   .nav-spacer { display: none; }
-  .nav-links { gap: 18px; }
+  .nav-links {
+    width: 100%;
+    gap: 22px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { flex: none; font-size: 13px; }
+
+  .paint { top: auto; bottom: 16px; left: 16px; transform: none; }
+  .paint-panel {
+    width: min(260px, calc(100vw - 32px));
+    max-height: calc(100vh - var(--nav-h) - 40px);
+    overflow-y: auto;
+  }
+
+  .info-toggle { right: 16px; bottom: 20px; }
+  .info-panel {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    max-height: 70vh;
+    padding: 18px 18px 20px;
+  }
 }

@@ -102,7 +102,7 @@ const state = {
   xray: false,
   explode: 0,
   explodeTarget: 0,
-  paint: { finish: 'original', h: 0, s: 0, v: 0.2, open: true },
+  paint: { finish: 'original', h: 0, s: 0, v: 0.2, open: !matchMedia('(max-width: 700px)').matches },
   center: new THREE.Vector3(0, 90, 0),
   radius: 150,
 };

@@ -32,7 +32,10 @@ function sdChain(px, py, pz, pts, rad) {
   return d;
 }
 
-function fusedSockel(material, { SW, SH, SD, CR, sockelY, legs, fillet = 9, res = 150 }) {
+// Auf kleinen Bildschirmen (Handy) gröberes Feld, damit das Laden nicht hängt
+const FIELD_RES = matchMedia('(max-width: 700px)').matches ? 100 : 150;
+
+function fusedSockel(material, { SW, SH, SD, CR, sockelY, legs, fillet = 9, res = FIELD_RES }) {
   // Feld-Bereich: Sockel + oberer Teil der Beine
   const min = new THREE.Vector3(-SW / 2 - 12, sockelY - SH / 2 - 44, -SD / 2 - 12);
   const max = new THREE.Vector3(SW / 2 + 12, sockelY + SH / 2 + 3, SD / 2 + 12);
