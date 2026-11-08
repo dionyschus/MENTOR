@@ -69,14 +69,15 @@ export function frustumGeometry(bw, bd, tw, td, h, offsetZ = 0) {
 }
 
 // Röhre entlang einer Kurve, die von r0 auf r1 zuläuft (Beine, Krallen, Fühler).
-export function taperedTube(curve, r0, r1, segments = 32, radial = 12) {
+// profile(u) steuert den Verlauf (0 → r0, 1 → r1), Standard linear.
+export function taperedTube(curve, r0, r1, segments = 32, radial = 12, profile = (u) => u) {
   const g = new THREE.TubeGeometry(curve, segments, r0, radial, false);
   const pos = g.attributes.position;
   const c = new THREE.Vector3(), v = new THREE.Vector3();
   for (let j = 0; j <= segments; j++) {
     const u = j / segments;
     curve.getPointAt(u, c);
-    const k = THREE.MathUtils.lerp(r0, r1, u) / r0;
+    const k = THREE.MathUtils.lerp(r0, r1, profile(u)) / r0;
     for (let i = 0; i <= radial; i++) {
       const idx = j * (radial + 1) + i;
       v.fromBufferAttribute(pos, idx).sub(c).multiplyScalar(k).add(c);
